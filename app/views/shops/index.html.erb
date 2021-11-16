@@ -1,11 +1,1 @@
-<% @shops.each do |shop| %>
-<div>
-  <%= link_to shop_path(shop.id) do %>
-    <%= attachment_image_tag shop, :image %>
-  <% end %>
-  <p>投稿ユーザー画像：<%= image_tag('sample-author1.jpg') %></p>
-  <p>ショップ名：<%= shop.shop_name %></p>
-  <p>説明：<%= shop.caption %></p>
-  <p>ユーザーネーム：<%= shop.user.name %></p>
-</div>
-<% end %>
+<%= render 'shops/list', shops: @shops %>

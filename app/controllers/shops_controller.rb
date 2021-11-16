@@ -7,16 +7,20 @@ class ShopsController < ApplicationController
     def create
         @shop = Shop.new(shop_params)
         @shop.user_id = current_user.id
-        @shop.save
-        redirect_to shops_path
+        if @shop.save
+          redirect_to shops_path
+        else
+          render :new
+        end
     end
 
     def index
-        @shops = Shop.all 
+        @shops = Shop.page(params[:page]).reverse_order
     end
     
     def show
         @shop = Shop.find(params[:id])
+        @comment = Comment.new
     end
     
     def destroy

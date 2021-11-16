@@ -1,10 +1,52 @@
+<div class="card-list-container py-5">
+  <div class="card w-50 mx-auto mt-4 shadow-lg">
+    <%= attachment_image_tag @shop, :image, class:"w-100 mx-auto lg"; %>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-2">
+          <%= attachment_image_tag @shop.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", class:"mt-3 rounded-circle"; %>
+        </div>
+        <div class="col-10">
+          <p class="card-title">ショップ名：<%= @shop.shop_name %></p>
+          <p>説明：<%= @shop.caption %></p>
+          <p>ユーザーネーム：<%= @shop.user.name %></p>
+          <p>投稿日時：<%= @shop.created_at.strftime('%Y/%m/%d') %></p>
+          <% if @shop.user == current_user %>
+            <%= link_to "投稿削除", shop_path(@shop), method: :delete %>
+          <% end %>
+          <% if @shop.favorited_by?(current_user) %>
+            <p>
+              <%= link_to shop_favorite_path(@shop), method: :delete do %>
+                ♥<%= @shop.favorites.count %> いいね
+              <% end %>
+            </p>
+            <% else %>
+            <p>
+              <%= link_to shop_favorites_path(@shop), method: :post do %>
+                ♡<%= @shop.favorites.count %> いいね
+              <% end %>
+            </p>
+          <% end %>
+          <p>コメント件数: <%= @shop.comments.count %></p>
+          <% @shop.comments.each do |comment| %>
+            <p><%= attachment_image_tag comment.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %></p>
+            <%= comment.user.name %>
+            <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+            <% if comment.user == current_user %>
+              <div>
+                <%= link_to "コメント削除", shop_comment_path(comment.shop, comment), method: :delete %>
+              </div>
+            <% end %>
+          <% end %>
+          <%= form_with(model:[@shop, @comment], local: true) do |f| %>
+            <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+            <%= f.submit "送信する" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div>
-  <%= attachment_image_tag @shop, :image %>
-  <p>ショップ名：<%= @shop.shop_name %></p>
-  <p>説明：<%= @shop.caption %></p>
-  <p>ユーザーネーム：<%= @shop.user.name %></p>
-  <p>投稿日時：<%= @shop.created_at.strftime('%Y/%m/%d') %></p>
-  <% if @shop.user == current_user %>
-    <%= link_to "削除", shop_path(@shop), method: :delete %>
-  <% end %>
+  
 </div>
