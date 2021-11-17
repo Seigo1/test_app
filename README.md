@@ -1,24 +1,17 @@
-# README
+# TestApp
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+お気に入りのお店を投稿して他のユーザーと共有できる。
 
-Things you may want to cover:
+### ターゲットユーザ
+・グルメ好き
 
-* Ruby version
+### 主な利用シーン
+・美味しいお店を知りたい
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 開発環境
+- OS：Linux2
+- 言語：HTML,CSS,Ruby
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
